@@ -1,0 +1,23 @@
+{
+  "name": "restaurants",
+  "version": "1.0.0",
+  "description": "List of restaurants with CRUD actions",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stephaniefriddle/Restaurants.git"
+  },
+  "author": "Stephanie Friddle",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/stephaniefriddle/Restaurants/issues"
+  },
+  "homepage": "https://github.com/stephaniefriddle/Restaurants#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "joi": "^17.4.2"
+  }
+}
