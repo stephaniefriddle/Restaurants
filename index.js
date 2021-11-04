@@ -1,9 +1,11 @@
 const Joi = require('joi');
 const express = require('express');
 const app = express();
+const fetch = (url) => import('node-fetch').then(({default: fetch}) => fetch(url));
 //const DevApi = require("@justinkprince/dev-api");
 
 app.use(express.json());
+
 
 // const config = {
 //     resources: ["users", "groups", "books"],
@@ -42,7 +44,7 @@ const restaurants = [
         location: 'location3', 
         pastVisits: 'pastVisits3', 
         wantToGo: 'wantToGo3'
-    },
+    }
 ];
 
 //define new routes with app.get
@@ -148,3 +150,23 @@ function validateRestaurant(restaurant) {
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`Listening on port ${port}...`));
 
+const resultContainer = document.querySelector('.result-container');
+const loadRestaurantsBtn = document.querySelector('.load-btn');
+
+function loadRestaurants() {
+    fetch('http://localhost:3000/api/restaurants')
+    .then(response => response.json())
+    //.then(data => console.log(data));
+    .then(function(restaurants) {
+        restaurants.forEach(function(restaurant) {
+        const div = document.createElement('div');
+        div.innerHTML = restaurant.name;
+        resultContainer.appendChild(div);
+     });
+    });
+}
+
+loadRestaurantsBtn.addEventListener('click', function() {
+    resultContainer.innerHTML = '';
+    loadRestaurants();
+})
