@@ -1,9 +1,6 @@
 const Joi = require('joi');
 const express = require('express');
 const app = express();
-const { response } = require('express');
-const { func } = require('joi');
-const fetch = (url) => import('node-fetch').then(({default: fetch}) => fetch(url));
 //const DevApi = require("@justinkprince/dev-api");
 
 app.use(express.json());
