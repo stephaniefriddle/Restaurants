@@ -1,6 +1,8 @@
 const Joi = require('joi');
 const express = require('express');
 const app = express();
+const { response } = require('express');
+const { func } = require('joi');
 const fetch = (url) => import('node-fetch').then(({default: fetch}) => fetch(url));
 //const DevApi = require("@justinkprince/dev-api");
 
@@ -149,24 +151,3 @@ function validateRestaurant(restaurant) {
 // PORT Is NOT working -- just uses port 3000 --19:52 on video "set PORT=XXXX" cmd
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`Listening on port ${port}...`));
-
-const resultContainer = document.querySelector('.result-container');
-const loadRestaurantsBtn = document.querySelector('.load-btn');
-
-function loadRestaurants() {
-    fetch('http://localhost:3000/api/restaurants')
-    .then(response => response.json())
-    //.then(data => console.log(data));
-    .then(function(restaurants) {
-        restaurants.forEach(function(restaurant) {
-        const div = document.createElement('div');
-        div.innerHTML = restaurant.name;
-        resultContainer.appendChild(div);
-     });
-    });
-}
-
-loadRestaurantsBtn.addEventListener('click', function() {
-    resultContainer.innerHTML = '';
-    loadRestaurants();
-})
