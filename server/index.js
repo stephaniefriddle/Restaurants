@@ -26,7 +26,6 @@ const restaurants = [
         price: 'price1', 
         location: 'location1', 
         pastVisits: 'pastVisits1', 
-        wantToGo: 'wantToGo1'
     },
     { 
         id: 2, 
@@ -35,7 +34,6 @@ const restaurants = [
         price: 'price2', 
         location: 'location2', 
         pastVisits: 'pastVisits2', 
-        wantToGo: 'wantToGo2'
     },
     { 
         id: 3, 
@@ -44,14 +42,13 @@ const restaurants = [
         price: 'price3', 
         location: 'location3', 
         pastVisits: 'pastVisits3', 
-        wantToGo: 'wantToGo3'
     }
 ];
 
 //define new routes with app.get
-app.get('/', (req, res) => {
-    res.send('Hello World!!!');
-});
+// app.get('/', (req, res) => {
+//     res.send('Hello World!!!');
+// });
 
 app.get('/api/restaurants', (req, res) => {
     res.send(restaurants);
@@ -82,7 +79,6 @@ app.post('/api/restaurants', (req, res) => {
         price: req.body.price,
         location: req.body.location,
         pastVisits: req.body.pastVisits,
-        wantToGo: req.body.wantToGo
     };
 
     restaurants.push(restaurant);
@@ -141,7 +137,6 @@ function validateRestaurant(restaurant) {
         price: Joi.string().min(1).required(),
         location: Joi.string().min().required(),
         pastVisits: Joi.string().min(),
-        wantToGo: Joi.string().min(),
     });
 
     return schema.validate(restaurant);
