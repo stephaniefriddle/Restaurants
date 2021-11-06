@@ -1,9 +1,11 @@
 const Joi = require('joi');
 const express = require('express');
 const app = express();
+var cors = require('cors');
 //const DevApi = require("@justinkprince/dev-api");
 
 app.use(express.json());
+app.use(cors());
 
 
 // const config = {
