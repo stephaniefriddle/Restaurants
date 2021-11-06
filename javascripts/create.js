@@ -4,12 +4,27 @@ function handleSubmit(event) {
     const data = new FormData(event.target);
     const formJSON = Object.fromEntries(data.entries());
 
-    formJSON.pastVisits = data.getAll("pastVisits");
+    formJSON.pastVisits = data.getAll("checkbox");
 
-    const results = document.querySelector('.results pre');
+    const results = document.querySelector('.results');
     results.innerText = JSON.stringify(formJSON, null, 2);
+    console.log(results);
 
-    console.log({ results });
+    fetch('http://localhost:3000/api/add', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+        },
+        body: JSON.stringify(formJSON),
+    })
+    //.then(response => response.json());
+    // .then(data => {
+    //     console.log('Success:', data);
+    //   })
+    //   .catch((error) => {
+    //     console.error('Error:', error);
+    //   });
 }
 
 const form = document.querySelector("form");

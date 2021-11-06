@@ -1,7 +1,7 @@
 const Joi = require('joi');
 const express = require('express');
 const app = express();
-var cors = require('cors');
+const cors = require('cors');
 //const DevApi = require("@justinkprince/dev-api");
 
 app.use(express.json());
@@ -18,7 +18,7 @@ app.use(cors());
 // api.listen(3003);
 
 
-const restaurants = [
+let restaurants = [
     {   
         id: 1, 
         name: 'restaurant1', 
@@ -54,25 +54,17 @@ app.get('/api/restaurants', (req, res) => {
     res.send(restaurants);
 });
 
-app.post('/api/restaurants', (req, res) => {
-    const {error} = validateRestaurant(req.body); //result.error
-    if(error) {
-        //400 bad request
-        return res.status(400).send(error.details[0].message);
-    }
+app.post('/api/add', (req, res) => {
 
-    // const schema = Joi.object ({
-    //     name: Joi.string().min(3).required()
-    // });
+    //THIS ISN'T WORKING -- NEED TO FIX!!!!!!
 
-    // const result = schema.validate(req.body);
-
-    // if(result.error) {
+    //const {error} = validateRestaurant(req.body); //result.error
+    // if(error) {
     //     //400 bad request
-    //     res.status(400).send(result.error.details[0].message);
-    //     return;
+    //     return res.status(400).send(error.details[0].message);
     // }
-    const restaurant = {
+
+    let restaurant = {
         id: restaurants.length + 1,
         name: req.body.name,
         cuisine: req.body.cuisine,
@@ -83,6 +75,7 @@ app.post('/api/restaurants', (req, res) => {
 
     restaurants.push(restaurant);
     res.send(`${restaurant.name} added to the database.`);
+    //console.log(`${restaurant.name} added to the database.`);
 });
 
 app.put('/api/restaurants/:id', (req, res) => {
