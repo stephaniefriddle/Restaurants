@@ -24,24 +24,27 @@ let restaurants = [
         name: 'restaurant1', 
         cuisine: 'cuisine1', 
         price: 'price1', 
-        location: 'location1', 
-        pastVisits: 'pastVisits1', 
+        visited: 'visited1',
+        favorite: 'favorite1',
+        priority: 'priority1', 
     },
     { 
         id: 2, 
         name: 'restaurant2', 
         cuisine: 'cuisine2', 
         price: 'price2', 
-        location: 'location2', 
-        pastVisits: 'pastVisits2', 
+        visited: 'visited2',
+        favorite: 'favorite1',
+        priority: 'priority1', 
     },
     { 
         id: 3, 
         name: 'restaurant3', 
         cuisine: 'cuisine3', 
         price: 'price3', 
-        location: 'location3', 
-        pastVisits: 'pastVisits3', 
+        visited: 'visited3',
+        favorite: 'favorite1',
+        priority: 'priority1', 
     }
 ];
 
@@ -69,8 +72,9 @@ app.post('/api/add', (req, res) => {
         name: req.body.name,
         cuisine: req.body.cuisine,
         price: req.body.price,
-        location: req.body.location,
-        pastVisits: req.body.pastVisits,
+        visited: req.body.visited,
+        favorite: req.body.favorite,
+        priority: req.body.priority,
     };
 
     restaurants.push(restaurant);
@@ -78,7 +82,7 @@ app.post('/api/add', (req, res) => {
     //console.log(`${restaurant.name} added to the database.`);
 });
 
-app.put('/api/restaurants/:id', (req, res) => {
+app.put('/api/restaurants/update/:id', (req, res) => {
     //Look up the restaurant
     //if not existing, return 404
     let restaurant = restaurants.find(c => c.id === parseInt(req.params.id));
@@ -95,8 +99,10 @@ app.put('/api/restaurants/:id', (req, res) => {
         return res.status(400).send(error.details[0].message);
     }
 
-    //Update restaurant -- ADD MORE TO THIS --48MIN
-    restaurant.name = req.body.name;
+    restaurant.visited = req.body.visited,
+    restaurant.favorite = req.body.favorite,
+    restaurant.priority = req.body.priority,
+
     //Return the updated restaurant
     res.send(restaurant);
 });
@@ -128,8 +134,9 @@ function validateRestaurant(restaurant) {
         name: Joi.string().min(3).required(),
         cuisine: Joi.string().min(4).required(),
         price: Joi.string().min(1).required(),
-        location: Joi.string().min().required(),
-        pastVisits: Joi.string().min(),
+        visited: Joi.string().min(),
+        favorite: Joi.string().min(),
+        priority: Joi.string().min(),
     });
 
     return schema.validate(restaurant);

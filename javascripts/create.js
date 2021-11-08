@@ -4,7 +4,9 @@ function handleSubmit(event) {
     const data = new FormData(event.target);
     const formJSON = Object.fromEntries(data.entries());
 
-    formJSON.pastVisits = data.getAll("checkbox");
+    formJSON.visited = data.getAll("checkbox");
+    formJSON.favorite = data.getAll("checkbox");
+    formJSON.priority = data.getAll("checkbox"); //added these, do I need to change anything below?
 
     const results = document.querySelector('.results');
     results.innerText = JSON.stringify(formJSON, null, 2);
