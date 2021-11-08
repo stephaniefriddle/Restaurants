@@ -39,7 +39,7 @@ function loadRestaurants() {
 
 loadRestaurantsBtn.addEventListener('click', function(event) {
     event.preventDefault();
-
+    
     resultContainer.innerHTML = '';
     loadRestaurants();
 })

@@ -25,6 +25,8 @@ function updateRestaurant() {
 
 updateRestaurantBtn.addEventListener('click', function() {
     updateRestaurantBtn.innerHTML = 'Save';
+    
+    //need to make it so the checkboxes load and I can check or uncheck values
 
     updateRestaurant();
     alert("Restaurant was updated");
