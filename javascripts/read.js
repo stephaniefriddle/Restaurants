@@ -19,6 +19,12 @@ function loadRestaurants() {
             // input.setAttribute("type", "hidden");
             // input.setAttribute("id", restaurant.id);
             // div.appendChild(input);
+            let updateButton = document.createElement("button");
+            updateButton.innerHTML = "Update Restaurant";
+            updateButton.setAttribute("class", "updateRestaurant");
+            updateButton.setAttribute("id", restaurant.id);
+            div.appendChild(updateButton);
+
             let deleteButton = document.createElement("button");
             deleteButton.innerHTML = "Delete Restaurant";
             deleteButton.setAttribute("class", "deleteRestaurant");
@@ -33,7 +39,4 @@ loadRestaurantsBtn.addEventListener('click', function() {
     resultContainer.innerHTML = '';
     loadRestaurants();
 })
-
-
-
 

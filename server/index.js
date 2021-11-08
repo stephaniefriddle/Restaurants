@@ -101,7 +101,7 @@ app.put('/api/restaurants/:id', (req, res) => {
     res.send(restaurant);
 });
 
-app.delete('/api/restaurants/:id', (req, res) => {
+app.delete('/api/restaurants/delete/:id', (req, res) => {
     //Look up the restaurant
     //Not existing, return 404
     let restaurant = restaurants.find(c => c.id === parseInt(req.params.id));
