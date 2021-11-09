@@ -119,7 +119,7 @@ app.delete('/api/restaurants/delete/:id', (req, res) => {
     restaurants.splice(index, 1);
 
     //Return the same restaurant
-    res.send(`${restaurant.name} was deleted.`);
+    res.send({message: `Restaurant was deleted.`});
 });
 
 //id is name of parameter 21:59

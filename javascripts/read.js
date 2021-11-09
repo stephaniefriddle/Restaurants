@@ -1,6 +1,12 @@
 const resultContainer = document.querySelector('.result-container');
 const loadRestaurantsBtn = document.querySelector('.load-btn');
 
+function removeChildren(parent){
+    while (parent.firstChild) {
+        parent.removeChild(parent.firstChild);
+    }
+}
+
 
 function loadRestaurants() {
     fetch('http://localhost:3000/api/restaurants', {
@@ -13,6 +19,7 @@ function loadRestaurants() {
     .then(response => response.json())
     .then(data => {
         let restaurants = data;
+        removeChildren(resultContainer);
         restaurants.forEach(function(restaurant) {
             const div = document.createElement('div');
             div.innerHTML = restaurant.name + restaurant.cuisine + restaurant.price + restaurant.visited + restaurant.favorite +  restaurant.priority;
@@ -23,13 +30,14 @@ function loadRestaurants() {
             let updateButton = document.createElement("button");
             updateButton.innerHTML = "Update";
             updateButton.setAttribute("class", "updateRestaurant");
-            updateButton.setAttribute("id", restaurant.id);
+            updateButton.setAttribute("data-restaurant-id", restaurant.id);
             div.appendChild(updateButton);
 
             let deleteButton = document.createElement("button");
             deleteButton.innerHTML = "Delete";
             deleteButton.setAttribute("class", "deleteRestaurant");
-            deleteButton.setAttribute("id", restaurant.id);
+            deleteButton.setAttribute("data-restaurant-id", restaurant.id);
+            deleteButton.addEventListener("click", deleteRestaurant);
             div.appendChild(deleteButton);
 
             resultContainer.appendChild(div);
@@ -39,8 +47,8 @@ function loadRestaurants() {
 
 loadRestaurantsBtn.addEventListener('click', function(event) {
     event.preventDefault();
-    
-    resultContainer.innerHTML = '';
+
+    //removeChildren(resultContainer);
     loadRestaurants();
 })
 
