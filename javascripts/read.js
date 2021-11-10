@@ -49,13 +49,6 @@ function loadRestaurants() {
         generateTableHead(table, tableData);
 
 
-
-            // let input = document.createElement("input");
-            // input.setAttribute("type", "hidden");
-            // input.setAttribute("id", restaurant.id);
-            // div.appendChild(input);
-
-
             // let updateButton = document.createElement("button");
             // updateButton.innerHTML = "Update";
             // updateButton.setAttribute("class", "updateRestaurant");
@@ -70,14 +63,16 @@ function loadRestaurants() {
             // //deleteButton.addEventListener("click", deleteRestaurant);
             // div.appendChild(deleteButton);
 
-            //resultContainer.appendChild(resultsTable);
-        })
-    //});
+            // let input = document.createElement("input");
+            // input.setAttribute("type", "hidden");
+            // input.setAttribute("id", restaurant.id);
+            // div.appendChild(input);
+
+    })
 }
 
 loadRestaurantsBtn.addEventListener('click', function() {
     //event.preventDefault(); //Do I need this? add 'event' inside of function()
-
     removeChildren(resultContainer);
     loadRestaurants();
 })
