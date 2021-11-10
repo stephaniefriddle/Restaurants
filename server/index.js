@@ -48,10 +48,6 @@ let restaurants = [
     }
 ];
 
-//define new routes with app.get
-// app.get('/', (req, res) => {
-//     res.send('Hello World!!!');
-// });
 
 app.get('/api/restaurants', (req, res) => {
     res.send(restaurants);
@@ -78,7 +74,7 @@ app.post('/api/add', (req, res) => {
     };
 
     restaurants.push(restaurant);
-    res.send(`${restaurant.name} added to the database.`);
+    res.send({message: `${restaurant.name} added to the database.`});
     //console.log(`${restaurant.name} added to the database.`);
 });
 
