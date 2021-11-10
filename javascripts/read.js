@@ -21,12 +21,17 @@ function loadRestaurants() {
 
         let restaurants = data;
 
+        removeChildren(resultContainer);
+
         function generateTableHead(table, tableData) {
             let thead = table.createTHead();
             let row = thead.insertRow();
             for (let key of tableData) {
                 let th = document.createElement('th');
                 let text = document.createTextNode(key);
+                if (key === 'priority') {
+                    th.setAttribute("colspan", "3");
+                }
                 th.appendChild(text);
                 row.appendChild(th);
             }
@@ -38,6 +43,25 @@ function loadRestaurants() {
                 for (key in element) {
                     let cell = row.insertCell();
                     let text = document.createTextNode(element[key]);
+                    if (key === 'priority') {
+                        let updateBtn = row.insertCell();
+                        let updateButton = document.createElement("button");
+                        updateButton.innerHTML = "Update";
+                        updateButton.setAttribute("class", "updateRestaurant");
+                        updateButton.setAttribute("data-restaurant-id", element.id);
+                        updateButton.addEventListener("click", updateRestaurant);
+
+                        updateBtn.appendChild(updateButton);
+
+                        let deleteBtn = row.insertCell();
+                        let deleteButton = document.createElement("button");
+                        deleteButton.innerHTML = "Delete";
+                        deleteButton.setAttribute("class", "deleteRestaurant");
+                        deleteButton.setAttribute("data-restaurant-id", element.id);
+                        deleteButton.addEventListener("click", deleteRestaurant);
+
+                        deleteBtn.appendChild(deleteButton);
+                    }
                     cell.appendChild(text);
                 }
             }
@@ -73,7 +97,6 @@ function loadRestaurants() {
 
 loadRestaurantsBtn.addEventListener('click', function() {
     //event.preventDefault(); //Do I need this? add 'event' inside of function()
-    removeChildren(resultContainer);
     loadRestaurants();
 })
 

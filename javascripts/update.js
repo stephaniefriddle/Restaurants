@@ -1,10 +1,10 @@
 const updateRestaurantBtn = document.querySelector('.updateRestaurant');
 
-const someData = {
-    visited: document.querySelector(visited).value,
-    favorite: document.querySelector(favorite).value,
-    priority: document.querySelector(priority).value
-   }
+// const someData = {
+//     visited: document.querySelector(visited).value,
+//     favorite: document.querySelector(favorite).value,
+//     priority: document.querySelector(priority).value
+//    }
 
 function updateRestaurant() {
 
