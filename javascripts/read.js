@@ -21,16 +21,19 @@ function loadRestaurants() {
         let restaurants = data;
         removeChildren(resultContainer);
         restaurants.forEach(function(restaurant) {
-            const div = document.createElement('div');
+            const div = document.createElement('input');
             div.innerHTML = restaurant.name + restaurant.cuisine + restaurant.price + restaurant.visited + restaurant.favorite +  restaurant.priority;
             // let input = document.createElement("input");
             // input.setAttribute("type", "hidden");
             // input.setAttribute("id", restaurant.id);
             // div.appendChild(input);
+
+
             let updateButton = document.createElement("button");
             updateButton.innerHTML = "Update";
             updateButton.setAttribute("class", "updateRestaurant");
             updateButton.setAttribute("data-restaurant-id", restaurant.id);
+            updateButton.addEventListener("click", updateRestaurant);
             div.appendChild(updateButton);
 
             let deleteButton = document.createElement("button");

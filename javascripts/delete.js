@@ -1,4 +1,3 @@
-//const resultContainer = document.querySelector('.result-container');
 const deleteRestaurantBtn = document.querySelector('.deleteRestaurant');
 
 
@@ -17,21 +16,8 @@ function deleteRestaurant(event) {
     .then(response => response.json())
     .then(data => {
         let message = data;
+        //alert(message);  --Make message stating restaurant was deleted.
         //Reload list
         loadRestaurants();
-    })
+    });
 }
-
-// if(deleteRestaurantBtn){
-//     deleteRestaurantBtn.addEventListener('click',  function() {
-//         resultContainer.innerHTML = '';
-//         deleteRestaurant();
-//         alert("Restaurant was deleted");
-//     })
-// }
-
-// deleteRestaurantBtn.addEventListener('click', function() {
-//     resultContainer.innerHTML = '';
-//     deleteRestaurant();
-//     alert("Restaurant was deleted");
-// })
