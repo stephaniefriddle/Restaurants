@@ -49,6 +49,7 @@ function loadRestaurants() {
                         updateButton.innerHTML = "Update";
                         updateButton.setAttribute("class", "updateRestaurant");
                         updateButton.setAttribute("data-restaurant-id", element.id);
+                        updateButton.setAttribute("display-name", element.name)
                         updateButton.setAttribute("data-bs-toggle", "modal");
                         updateButton.setAttribute("data-bs-target", "#myModal");
                         updateButton.addEventListener("click", updateRestaurant);
@@ -62,6 +63,7 @@ function loadRestaurants() {
                         deleteButton.addEventListener("click", deleteRestaurant);
                         deleteBtn.appendChild(deleteButton);
                     }
+
                     cell.appendChild(text);
                 }
             }

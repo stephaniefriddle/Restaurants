@@ -42,29 +42,27 @@
     
             <!-- Modal Header -->
             <div class="modal-header">
-            <h4 class="modal-title" id="insert-name">Update Restaurant</h4>
+            <h4 class="modal-title" id="insert-name">Update </h4>
             <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
     
             <!-- Modal body -->
             <div class="modal-body">
                 <form class="createForm">
-                    <label for="name"></label>
-                
-                    <label for="checkbox">Visited Before?</label>
-                    <input type="checkbox" name="visited" id="visited">
+                    <label for="visited">Visited Before?</label>
+                    <input type="checkbox" name="visited" class="checkboxValue" id="visited">
             
                     <label for="favorite">Set Favorite?</label>
-                    <input type="checkbox" name="favorite" id="favorite">
+                    <input type="checkbox" name="favorite" class="checkboxValue" id="favorite">
             
                     <label for="priority">Set Priority?</label>
-                    <input type="checkbox" name="priority" id="priority">
+                    <input type="checkbox" name="priority" class="checkboxValue" id="priority">
                 </form>        
             </div>
     
             <!-- Modal footer -->
             <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Save</button>
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="save-btn">Save</button>
             </div>
   
         </div>
