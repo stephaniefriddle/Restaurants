@@ -49,8 +49,9 @@ function loadRestaurants() {
                         updateButton.innerHTML = "Update";
                         updateButton.setAttribute("class", "updateRestaurant");
                         updateButton.setAttribute("data-restaurant-id", element.id);
+                        updateButton.setAttribute("data-bs-toggle", "modal");
+                        updateButton.setAttribute("data-bs-target", "#myModal");
                         updateButton.addEventListener("click", updateRestaurant);
-
                         updateBtn.appendChild(updateButton);
 
                         let deleteBtn = row.insertCell();
@@ -59,7 +60,6 @@ function loadRestaurants() {
                         deleteButton.setAttribute("class", "deleteRestaurant");
                         deleteButton.setAttribute("data-restaurant-id", element.id);
                         deleteButton.addEventListener("click", deleteRestaurant);
-
                         deleteBtn.appendChild(deleteButton);
                     }
                     cell.appendChild(text);
@@ -71,27 +71,6 @@ function loadRestaurants() {
         let tableData = Object.keys(restaurants[0]);
         generateTable(table, restaurants);
         generateTableHead(table, tableData);
-
-
-            // let updateButton = document.createElement("button");
-            // updateButton.innerHTML = "Update";
-            // updateButton.setAttribute("class", "updateRestaurant");
-            // updateButton.setAttribute("data-restaurant-id", restaurant.id);
-            // //updateButton.addEventListener("click", updateRestaurant);
-            // div.appendChild(updateButton);
-
-            // let deleteButton = document.createElement("button");
-            // deleteButton.innerHTML = "Delete";
-            // deleteButton.setAttribute("class", "deleteRestaurant");
-            // deleteButton.setAttribute("data-restaurant-id", restaurant.id);
-            // //deleteButton.addEventListener("click", deleteRestaurant);
-            // div.appendChild(deleteButton);
-
-            // let input = document.createElement("input");
-            // input.setAttribute("type", "hidden");
-            // input.setAttribute("id", restaurant.id);
-            // div.appendChild(input);
-
     })
 }
 

@@ -8,8 +8,9 @@ const updateRestaurantBtn = document.querySelector('.updateRestaurant');
 
 function updateRestaurant() {
 
-    let restaurantId = updateRestaurantBtn.id;
-    console.log(restaurantId);
+    //let restaurantId = updateButton.getAttribute('data-restaurant-id');
+    //console.log(restaurantId);
+    document.getElementById('insert-name').innerHTML = `Update ${restaurants.name}`;
 
     fetch('http://localhost:3000/api/restaurants/update/' + restaurantId, {
         method: 'PATCH',
