@@ -1,9 +1,12 @@
 const Joi = require('joi');
 const express = require('express');
 const app = express();
+const cors = require('cors');
 //const DevApi = require("@justinkprince/dev-api");
 
 app.use(express.json());
+app.use(cors());
+
 
 // const config = {
 //     resources: ["users", "groups", "books"],
@@ -15,78 +18,67 @@ app.use(express.json());
 // api.listen(3003);
 
 
-const restaurants = [
+let restaurants = [
     {   
         id: 1, 
         name: 'restaurant1', 
         cuisine: 'cuisine1', 
         price: 'price1', 
-        location: 'location1', 
-        pastVisits: 'pastVisits1', 
-        wantToGo: 'wantToGo1'
+        visited: 'visited1',
+        favorite: 'favorite1',
+        priority: 'priority1', 
     },
     { 
         id: 2, 
         name: 'restaurant2', 
         cuisine: 'cuisine2', 
         price: 'price2', 
-        location: 'location2', 
-        pastVisits: 'pastVisits2', 
-        wantToGo: 'wantToGo2'
+        visited: 'visited2',
+        favorite: 'favorite1',
+        priority: 'priority1', 
     },
     { 
         id: 3, 
         name: 'restaurant3', 
         cuisine: 'cuisine3', 
         price: 'price3', 
-        location: 'location3', 
-        pastVisits: 'pastVisits3', 
-        wantToGo: 'wantToGo3'
-    },
+        visited: 'visited3',
+        favorite: 'favorite1',
+        priority: 'priority1', 
+    }
 ];
 
-//define new routes with app.get
-app.get('/', (req, res) => {
-    res.send('Hello World!!!');
-});
 
 app.get('/api/restaurants', (req, res) => {
     res.send(restaurants);
 });
 
-app.post('/api/restaurants', (req, res) => {
-    const {error} = validateRestaurant(req.body); //result.error
-    if(error) {
-        //400 bad request
-        return res.status(400).send(error.details[0].message);
-    }
+app.post('/api/add', (req, res) => {
 
-    // const schema = Joi.object ({
-    //     name: Joi.string().min(3).required()
-    // });
+    //THIS ISN'T WORKING -- NEED TO FIX!!!!!!
 
-    // const result = schema.validate(req.body);
-
-    // if(result.error) {
+    //const {error} = validateRestaurant(req.body); //result.error
+    // if(error) {
     //     //400 bad request
-    //     res.status(400).send(result.error.details[0].message);
-    //     return;
+    //     return res.status(400).send(error.details[0].message);
     // }
-    const restaurant = {
+
+    let restaurant = {
         id: restaurants.length + 1,
         name: req.body.name,
         cuisine: req.body.cuisine,
         price: req.body.price,
-        location: req.body.location,
-        pastVisits: req.body.pastVisits,
-        wantToGo: req.body.wantToGo
+        visited: req.body.visited,
+        favorite: req.body.favorite,
+        priority: req.body.priority,
     };
 
     restaurants.push(restaurant);
-    res.send(`${restaurant.name} added to the database.`);
+    res.send({message: `${restaurant.name} added to the database.`});
+    //console.log(`${restaurant.name} added to the database.`);
 });
 
-app.put('/api/restaurants/:id', (req, res) => {
+app.put('/api/restaurants/update/:id', (req, res) => {
     //Look up the restaurant
     //if not existing, return 404
     let restaurant = restaurants.find(c => c.id === parseInt(req.params.id));
@@ -103,13 +95,15 @@ app.put('/api/restaurants/:id', (req, res) => {
         return res.status(400).send(error.details[0].message);
     }
 
-    //Update restaurant -- ADD MORE TO THIS --48MIN
-    restaurant.name = req.body.name;
+    restaurant.visited = req.body.visited,
+    restaurant.favorite = req.body.favorite,
+    restaurant.priority = req.body.priority,
+
     //Return the updated restaurant
     res.send(restaurant);
 });
 
-app.delete('/api/restaurants/:id', (req, res) => {
+app.delete('/api/restaurants/delete/:id', (req, res) => {
     //Look up the restaurant
     //Not existing, return 404
     let restaurant = restaurants.find(c => c.id === parseInt(req.params.id));
@@ -121,7 +115,7 @@ app.delete('/api/restaurants/:id', (req, res) => {
     restaurants.splice(index, 1);
 
     //Return the same restaurant
-    res.send(`${restaurant.name} was deleted.`);
+    res.send({message: `Restaurant was deleted.`});
 });
 
 //id is name of parameter 21:59
@@ -136,9 +130,9 @@ function validateRestaurant(restaurant) {
         name: Joi.string().min(3).required(),
         cuisine: Joi.string().min(4).required(),
         price: Joi.string().min(1).required(),
-        location: Joi.string().min().required(),
-        pastVisits: Joi.string().min(),
-        wantToGo: Joi.string().min(),
+        visited: Joi.string().min(),
+        favorite: Joi.string().min(),
+        priority: Joi.string().min(),
     });
 
     return schema.validate(restaurant);
@@ -147,4 +141,3 @@ function validateRestaurant(restaurant) {
 // PORT Is NOT working -- just uses port 3000 --19:52 on video "set PORT=XXXX" cmd
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`Listening on port ${port}...`));
-
