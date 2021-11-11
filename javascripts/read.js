@@ -42,7 +42,9 @@ function loadRestaurants() {
                 let row = table.insertRow();
                 for (key in element) {
                     let cell = row.insertCell();
+                    //cell.setAttribute("icon", key) --for CSS maybe? want to display check or x
                     let text = document.createTextNode(element[key]);
+
                     if (key === 'priority') {
                         let updateBtn = row.insertCell();
                         let updateButton = document.createElement("button");
@@ -63,12 +65,10 @@ function loadRestaurants() {
                         deleteButton.addEventListener("click", deleteRestaurant);
                         deleteBtn.appendChild(deleteButton);
                     }
-
                     cell.appendChild(text);
                 }
             }
         }
-
         let table = document.querySelector('table');
         let tableData = Object.keys(restaurants[0]);
         generateTable(table, restaurants);
