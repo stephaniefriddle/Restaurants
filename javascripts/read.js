@@ -77,7 +77,6 @@ function loadRestaurants() {
 }
 
 loadRestaurantsBtn.addEventListener('click', function() {
-    //event.preventDefault(); //Do I need this? add 'event' inside of function()
     loadRestaurants();
 })
 

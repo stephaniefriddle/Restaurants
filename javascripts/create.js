@@ -4,9 +4,10 @@ function handleSubmit(event) {
     const data = new FormData(event.target);
     const formJSON = Object.fromEntries(data.entries());
 
-    formJSON.visited = data.getAll("checkbox");
-    formJSON.favorite = data.getAll("checkbox");
-    formJSON.priority = data.getAll("checkbox"); //added these, do I need to change anything below?
+    formJSON.visited = document.getElementById('visited').checked, 
+    formJSON.favorite = document.getElementById('favorite').checked, 
+    formJSON.priority = document.getElementById('priority').checked
+
 
     const results = document.querySelector('.results');
     results.innerText = JSON.stringify(formJSON, null, 2);
@@ -20,26 +21,12 @@ function handleSubmit(event) {
         },
         body: JSON.stringify(formJSON),
     })
-    //.then(response => response.json());
-    // .then(data => {
-    //     console.log('Success:', data);
-    //   })
-    //   .catch((error) => {
-    //     console.error('Error:', error);
-    //   });
+    .then(alert("Restaurant was added"))
+    .then(document.getElementById('createForm').reset());
 }
 
 const form = document.querySelector("form");
 form.addEventListener("submit", handleSubmit);
-
-
-// const submitRestaurantBtn = document.querySelector('#submit');
-
-//const { response } = require("express");
-
-// function submitRestaurant() {
-//     //e.preventDefault();
-//     const formData = new FormData(document.querySelector("#createForm"));
 
 //     data = {
 //         name: formData.querySelector('input[name="name"]').value,
@@ -49,20 +36,4 @@ form.addEventListener("submit", handleSubmit);
 //         pastVisits: formData.querySelector('input[name="pastVisits"]').value,
 //     }
 
-//         fetch('http://localhost:3000/api/restaurants', {
-//             method: 'POST',
-//             // mode: 'cors',
-//             body: JSON.stringify(data),
-//             headers: {
-//                 'Content-Type': 'application/json'
-//             }
-//         })
-//         restaurants.push(restaurant);
-//         res.send(`${restaurant.name} added to the database.`);
-// }
-
-// submitRestaurantBtn.addEventListener('click', function() {
-//     resultContainer.innerHTML = '';
-//     submitRestaurant();
-// })
 

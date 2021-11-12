@@ -13,7 +13,7 @@ function updateRestaurant(event) {
 
     document.getElementById('save-btn').onclick = function(event) {
 
-        saveButton = event.target; //do I need this?
+        saveButton = event.target;
 
         let updatedRestaurant = {
             visited: document.getElementById('visited').checked, 
@@ -22,15 +22,15 @@ function updateRestaurant(event) {
         }
     
         fetch('http://localhost:3000/api/restaurants/update/' + restaurantId, {
-            method: 'PATCH',
+            method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json',
             },
             body: JSON.stringify(updatedRestaurant)
         })
-        //.then(response => response.json())
-        //.then(json => console.log(json))
+        .then(response => response.json())
+        .then(json => console.log(json))
         .then(loadRestaurants());
     }
 }
