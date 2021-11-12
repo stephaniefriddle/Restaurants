@@ -14,10 +14,7 @@ function deleteRestaurant(event) {
     },
     })
     .then(response => response.json())
-    .then(data => {
-        let message = data;
-        //alert(message);  --Make message stating restaurant was deleted.
-        //Reload list
-        loadRestaurants();
-    });
+    .then(json => console.log(json))
+    .then(alert("Restaurant was deleted"))
+    .then(loadRestaurants());
 }

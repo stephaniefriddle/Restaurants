@@ -24,27 +24,27 @@ let restaurants = [
         name: 'restaurant1', 
         cuisine: 'cuisine1', 
         price: 'price1', 
-        visited: 'visited1',
-        favorite: 'favorite1',
-        priority: 'priority1', 
+        visited: true,
+        favorite: false,
+        priority: false, 
     },
     { 
         id: 2, 
         name: 'restaurant2', 
         cuisine: 'cuisine2', 
         price: 'price2', 
-        visited: 'visited2',
-        favorite: 'favorite1',
-        priority: 'priority1', 
+        visited: true,
+        favorite: true,
+        priority: true, 
     },
     { 
         id: 3, 
         name: 'restaurant3', 
         cuisine: 'cuisine3', 
         price: 'price3', 
-        visited: 'visited3',
-        favorite: 'favorite1',
-        priority: 'priority1', 
+        visited: false,
+        favorite: false,
+        priority: true, 
     }
 ];
 
@@ -89,11 +89,11 @@ app.put('/api/restaurants/update/:id', (req, res) => {
 
     //Validate
     //If invalid, return 400 - bad request
-    const {error} = validateRestaurant(req.body); //result.error
-    if(error) {
-        //400 bad request
-        return res.status(400).send(error.details[0].message);
-    }
+    // const {error} = validateRestaurant(req.body); //result.error
+    // if(error) {
+    //     //400 bad request
+    //     return res.status(400).send(error.details[0].message);
+    // }
 
     restaurant.visited = req.body.visited,
     restaurant.favorite = req.body.favorite,
@@ -118,25 +118,24 @@ app.delete('/api/restaurants/delete/:id', (req, res) => {
     res.send({message: `Restaurant was deleted.`});
 });
 
-//id is name of parameter 21:59
 app.get('/api/restaurants/:id', (req, res) => {
     let restaurant = restaurants.find(c => c.id === parseInt(req.params.id));
     if (!restaurant) return res.status(404).send('The restaurant with the given ID was not found.');
     res.send(restaurant);
 })
 
-function validateRestaurant(restaurant) {
-    const schema = Joi.object ({
-        name: Joi.string().min(3).required(),
-        cuisine: Joi.string().min(4).required(),
-        price: Joi.string().min(1).required(),
-        visited: Joi.string().min(),
-        favorite: Joi.string().min(),
-        priority: Joi.string().min(),
-    });
+// function validateRestaurant(restaurant) {
+//     const schema = Joi.object ({
+//         name: Joi.string().min(3).required(),
+//         cuisine: Joi.string().min(4).required(),
+//         price: Joi.string().min(1).required(),
+//         visited: Joi.string().min(),
+//         favorite: Joi.string().min(),
+//         priority: Joi.string().min(),
+//     });
 
-    return schema.validate(restaurant);
-}
+//     return schema.validate(restaurant);
+// }
 
 // PORT Is NOT working -- just uses port 3000 --19:52 on video "set PORT=XXXX" cmd
 const port = process.env.PORT || 3000;

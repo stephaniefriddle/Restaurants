@@ -42,15 +42,19 @@ function loadRestaurants() {
                 let row = table.insertRow();
                 for (key in element) {
                     let cell = row.insertCell();
+                    //cell.setAttribute("icon", key) --for CSS maybe? want to display check or x
                     let text = document.createTextNode(element[key]);
+
                     if (key === 'priority') {
                         let updateBtn = row.insertCell();
                         let updateButton = document.createElement("button");
                         updateButton.innerHTML = "Update";
                         updateButton.setAttribute("class", "updateRestaurant");
                         updateButton.setAttribute("data-restaurant-id", element.id);
+                        updateButton.setAttribute("display-name", element.name)
+                        updateButton.setAttribute("data-bs-toggle", "modal");
+                        updateButton.setAttribute("data-bs-target", "#myModal");
                         updateButton.addEventListener("click", updateRestaurant);
-
                         updateBtn.appendChild(updateButton);
 
                         let deleteBtn = row.insertCell();
@@ -59,44 +63,20 @@ function loadRestaurants() {
                         deleteButton.setAttribute("class", "deleteRestaurant");
                         deleteButton.setAttribute("data-restaurant-id", element.id);
                         deleteButton.addEventListener("click", deleteRestaurant);
-
                         deleteBtn.appendChild(deleteButton);
                     }
                     cell.appendChild(text);
                 }
             }
         }
-
         let table = document.querySelector('table');
         let tableData = Object.keys(restaurants[0]);
         generateTable(table, restaurants);
         generateTableHead(table, tableData);
-
-
-            // let updateButton = document.createElement("button");
-            // updateButton.innerHTML = "Update";
-            // updateButton.setAttribute("class", "updateRestaurant");
-            // updateButton.setAttribute("data-restaurant-id", restaurant.id);
-            // //updateButton.addEventListener("click", updateRestaurant);
-            // div.appendChild(updateButton);
-
-            // let deleteButton = document.createElement("button");
-            // deleteButton.innerHTML = "Delete";
-            // deleteButton.setAttribute("class", "deleteRestaurant");
-            // deleteButton.setAttribute("data-restaurant-id", restaurant.id);
-            // //deleteButton.addEventListener("click", deleteRestaurant);
-            // div.appendChild(deleteButton);
-
-            // let input = document.createElement("input");
-            // input.setAttribute("type", "hidden");
-            // input.setAttribute("id", restaurant.id);
-            // div.appendChild(input);
-
     })
 }
 
 loadRestaurantsBtn.addEventListener('click', function() {
-    //event.preventDefault(); //Do I need this? add 'event' inside of function()
     loadRestaurants();
 })
 
