@@ -4,9 +4,11 @@ function handleSubmit(event) {
     const data = new FormData(event.target);
     const formJSON = Object.fromEntries(data.entries());
 
-    formJSON.visited = document.getElementById('visited').checked, 
-    formJSON.favorite = document.getElementById('favorite').checked, 
-    formJSON.priority = document.getElementById('priority').checked
+    formJSON.cuisine = document.getElementById('cuisine-new').value,
+    formJSON.price = document.getElementById('price-new').value,
+    formJSON.visited = document.getElementById('visited-new').checked, 
+    formJSON.favorite = document.getElementById('favorite-new').checked, 
+    formJSON.priority = document.getElementById('priority-new').checked
 
 
     const results = document.querySelector('.results');
