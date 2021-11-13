@@ -10,76 +10,75 @@
 
     <title>Restaurant Decisions - Create New Restaurant</title>
 </head>
-<body>
+<body class="site">
     <div id="layoutControl">
-        <header class="header">
+        <header>
             <ul class="nav justify-content-end">
                 <li class="nav-item">
-                <a class="nav-link" href="index.html">Home</a>
+                    <a class="nav-link" href="index.html">Home</a>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="create.html">Create</a>
+                    <a class="nav-link active" aria-current="page" href="create.html">Create</a>
                 </li>
             </ul>
         </header>
-        <div id="fullForm">
-            <form class="createForm" id="createForm">
-                <div class="formElements formNameField">
-                    <label for="name">Name:</label>
-                    <input type="text" name="name" id="name-new">
-                </div>
-                <div class="formElements">
-                    <label for="cuisine">Cuisine:</label>
-                    <select class="form-select" aria-label="Default select example" id="cuisine-new">
-                        <option selected>Select a Cuisine</option>
-                        <option value="American">American</option>
-                        <option value="Barbecue">Barbecue</option>
-                        <option value="Chinese">Chinese</option>
-                        <option value="French">French</option>
-                        <option value="Hamburger">Hamburger</option>
-                        <option value="Indian">Indian</option>
-                        <option value="Italian">Italian</option>
-                        <option value="Japanese">Japanese</option>
-                        <option value="Mexican">Mexican</option>
-                        <option value="Pizza">Pizza</option>
-                        <option value="Seafood">Seafood</option>
-                        <option value="Steak">Steak</option>
-                        <option value="Sushi">Sushi</option>
-                        <option value="Thai">Thai</option>
-                    </select>
-                </div>
-                <div class="formElements">
-                    <label for="price">Price:</label>
-                    <select class="form-select" aria-label="Default select example" id="price-new">
-                        <option selected>Select a Price</option>
-                        <option value="$">$</option>
-                        <option value="$$">$$</option>
-                        <option value="$$$">$$$</option>
-                    </select>
-                </div>
-                <div class="formElements">
-                    <label for="checkbox">Visited Before?</label>
-                    <input type="checkbox" name="visited" id="visited-new">
-                </div>
-                <div class="formElements">
-                    <label for="favorite">Set Favorite?</label>
-                    <input type="checkbox" name="favorite" id="favorite-new">
-                </div>
-                <div class="formElements">
-                    <label for="priority">Set Priority?</label>
-                    <input type="checkbox" name="priority" id="priority-new">
-                </div>
-                <button class="submit" type="submit">Submit</button>
-            </form>
-        </div>
-        
-        <div class="results">
-            <pre></pre>
-        </div>
-        <div class="push"></div>
-        </div>
-
-        <footer class="footer">
+        <main class="site-content">
+            <div id="fullForm">
+                <form class="createForm" id="createForm">
+                    <div class="formElements formNameField">
+                        <label for="name">Name:</label>
+                        <input type="text" name="name" id="name-new">
+                    </div>
+                    <div class="formElements">
+                        <label for="cuisine">Cuisine:</label>
+                        <select class="form-select" aria-label="Default select example" id="cuisine-new">
+                            <option selected>Select a Cuisine</option>
+                            <option value="American">American</option>
+                            <option value="Barbecue">Barbecue</option>
+                            <option value="Chinese">Chinese</option>
+                            <option value="French">French</option>
+                            <option value="Hamburger">Hamburger</option>
+                            <option value="Indian">Indian</option>
+                            <option value="Italian">Italian</option>
+                            <option value="Japanese">Japanese</option>
+                            <option value="Mexican">Mexican</option>
+                            <option value="Pizza">Pizza</option>
+                            <option value="Seafood">Seafood</option>
+                            <option value="Steak">Steak</option>
+                            <option value="Sushi">Sushi</option>
+                            <option value="Thai">Thai</option>
+                        </select>
+                    </div>
+                    <div class="formElements">
+                        <label for="price">Price:</label>
+                        <select class="form-select" aria-label="Default select example" id="price-new">
+                            <option selected>Select a Price</option>
+                            <option value="$">$</option>
+                            <option value="$$">$$</option>
+                            <option value="$$$">$$$</option>
+                        </select>
+                    </div>
+                    <div class="formElements">
+                        <label for="checkbox">Visited Before?</label>
+                        <input type="checkbox" name="visited" id="visited-new">
+                    </div>
+                    <div class="formElements">
+                        <label for="favorite">Set Favorite?</label>
+                        <input type="checkbox" name="favorite" id="favorite-new">
+                    </div>
+                    <div class="formElements">
+                        <label for="priority">Set Priority?</label>
+                        <input type="checkbox" name="priority" id="priority-new">
+                    </div>
+                    <button class="submit" type="submit">Submit</button>
+                </form>
+            </div>
+            
+            <div class="results">
+                <pre></pre>
+            </div>
+        </main>
+        <footer>
             This site was developed for consideration towards the completion of the JavaScript class in Code Louisville <br>
             &#169 2021 Stephanie Friddle 
         </footer>
