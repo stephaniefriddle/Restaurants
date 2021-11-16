@@ -2,19 +2,19 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
-const DevApi = require("@justinkprince/dev-api");
 const loki = require('lokijs');
+const path = require('path');
 
 app.use(express.json());
 app.use(cors());
 
-//import loki from "lokijs";
-
-const db = new loki(path.resolve('.data.json'), { persistenceMethod: "fs" });
+//const db = new loki(path.resolve('./data.json'), { persistenceMethod: "fs" });
+const db = new loki(('./data.json'), { persistenceMethod: "fs" });
 
 let collection = db.getCollection('restaurants');
 
 if (!collection) {
+    console.log("collection");
     collection = db.addCollection('restaurants');
 }
 
@@ -52,14 +52,17 @@ if (!collection) {
 
 //GET
 app.get('/api/restaurants', (req, res) => {
-    const restaurants = db.getCollection('restaurants').data;
-    res.json(collection);
+    const restaurants = db.getCollection('restaurants');
+    console.log(restaurants);
+    res.json(restaurants);
 });
 
-app.post('/api/add', (req, res) => {
+app.post('/api/restaurants/add', (req, res) => {
+    //const requestData = req.body;
+    let collection = db.getCollection('restaurants');
 
     let restaurant = {
-        id: restaurants.length + 1,
+        id: collection.length + 1,
         name: req.body.name,
         cuisine: req.body.cuisine,
         price: req.body.price,
@@ -68,8 +71,13 @@ app.post('/api/add', (req, res) => {
         priority: req.body.priority,
     };
 
-    restaurants.push(restaurant);
-    res.send({message: `${restaurant.name} added to the database.`});
+
+    collection.insert(restaurant);
+    db.saveDatabase();
+    res.json(restaurant);
+
+    // restaurants.push(restaurant);
+    // res.send({message: `${restaurant.name} added to the database.`});
 });
 
 
@@ -94,9 +102,10 @@ app.put('/api/restaurants/update/:id', (req, res) => {
     collection.update(item);
     db.saveDatabase();
     res.json(item);
+
     // restaurant.visited = req.body.visited,
     // restaurant.favorite = req.body.favorite,
-    // restaurant.priority = req.body.priority,
+    // restaurant.priority = req.body.priority
 
     //Return the updated restaurant
     //res.send(restaurant);
@@ -122,11 +131,12 @@ app.delete('/api/restaurants/delete/:id', (req, res) => {
     res.send({message: `Restaurant was deleted.`});
 });
 
-app.get('/api/restaurants/:id', (req, res) => {
-    let restaurant = restaurants.find(c => c.id === parseInt(req.params.id));
-    if (!restaurant) return res.status(404).send('The restaurant with the given ID was not found.');
-    res.send(restaurant);
-})
+//GET individual restaurant
+// app.get('/api/restaurants/:id', (req, res) => {
+//     let restaurant = restaurants.find(c => c.id === parseInt(req.params.id));
+//     if (!restaurant) return res.status(404).send('The restaurant with the given ID was not found.');
+//     res.send(restaurant);
+// })
 
 
 // PORT Is NOT working -- just uses port 3000 --19:52 on video "set PORT=XXXX" cmd

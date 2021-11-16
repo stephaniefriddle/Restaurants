@@ -15,7 +15,7 @@ function handleSubmit(event) {
     results.innerText = JSON.stringify(formJSON, null, 2);
     console.log(results);
 
-    fetch('http://localhost:3000/api/add', {
+    fetch('http://localhost:3000/api/restaurants/add', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
