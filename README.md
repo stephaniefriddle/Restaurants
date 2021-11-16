@@ -8,7 +8,7 @@ You're currently reading the README, but below you will find the other requireme
 
  - You'll see more than the required 5 commits.
 
- - Read and parse an external file (such as JSON or CSV) into your application and display some data from that in your app.  You will see this feature with the 'Load Restaurant' button.
+ - Read and parse an external file (such as JSON or CSV) into your application and display some data from that in your app.  You will see this feature with the 'Ready? Let's do it.' button.
 
  - Retrieve data from an external API and display data in your app. I use CRUD actions with fetch() for this.
 

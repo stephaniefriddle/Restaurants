@@ -75,11 +75,13 @@ header {
 
 #name-new, #visited-new, #favorite-new, #priority-new {
   margin-left: .5em;
+  border: 1px solid #3f4d66;
 }
 
 .submit {
   margin: 1em .5em;
   padding: .25em 1.25em;
+  border: 2px solid #3f4d66;
 }
 
 .results {
