@@ -8,15 +8,16 @@ const path = require('path');
 app.use(express.json());
 app.use(cors());
 
-//const db = new loki(path.resolve('./data.json'), { persistenceMethod: "fs" });
-const db = new loki(('./data.json'), { persistenceMethod: "fs" });
+const db = new loki(path.resolve('./data.json'), { persistenceMethod: "fs" });
+//const db = new loki(('./data.json'), { persistenceMethod: "fs" });
 
-let collection = db.getCollection('restaurants');
-
-if (!collection) {
-    console.log("collection");
-    collection = db.addCollection('restaurants');
-}
+db.loadDatabase({}, () => {
+    let collection = db.getCollection("restaurants");
+  
+    if (!collection) {
+      collection = db.addCollection("restaurants");
+    }
+  });
 
 // let restaurants = [
 //     {   
@@ -61,8 +62,18 @@ app.post('/api/restaurants/add', (req, res) => {
     //const requestData = req.body;
     let collection = db.getCollection('restaurants');
 
+    function create_UUID(){
+        var dt = new Date().getTime();
+        var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+            var r = (dt + Math.random()*16)%16 | 0;
+            dt = Math.floor(dt/16);
+            return (c=='x' ? r :(r&0x3|0x8)).toString(16);
+        });
+        return uuid;
+    }
+
     let restaurant = {
-        id: collection.length + 1,
+        id: create_UUID(),
         name: req.body.name,
         cuisine: req.body.cuisine,
         price: req.body.price,
