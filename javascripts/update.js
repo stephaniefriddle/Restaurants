@@ -26,9 +26,9 @@ function updateRestaurant(event) {
             },
             body: JSON.stringify(updatedRestaurant)
         })
-        //.then(response => response.json())
+        .then(response => response.json())
         .then(json => console.log(json))
         .then(removeChildren(resultContainer))
-        .then(loadRestaurants());
+        //.then(loadRestaurants());
     }
 }
