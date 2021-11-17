@@ -4,12 +4,23 @@ html, body {
 }
 
 body {
-  background: url(../images/desktopCreateBack.jpg) no-repeat left;
+  background: url(../images/create.jpg) no-repeat left;
   background-size: cover;
   opacity: 1.0;
   filter: alpha(opacity=30);
 }
-.header {
+
+.site {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+.site-content {
+  flex: 1;
+}
+
+header {
   padding: 2em 2em .5em;
   background-color: #540b0e;
   border-bottom: 15px solid #e09f3e;
@@ -64,11 +75,13 @@ body {
 
 #name-new, #visited-new, #favorite-new, #priority-new {
   margin-left: .5em;
+  border: 1px solid #3f4d66;
 }
 
 .submit {
   margin: 1em .5em;
   padding: .25em 1.25em;
+  border: 2px solid #3f4d66;
 }
 
 .results {
@@ -76,11 +89,7 @@ body {
 }
 
 /* Footer layout */
-.footer, .push {
-  height: 80px;
-}
-
-.footer {
+footer {
   text-align: center;
   padding: 1em .5em;
   background-color: #e09f3e;
@@ -108,17 +117,11 @@ body {
     flex-direction: column;
     align-items: flex-end;
     min-height: 100%;
-    margin-bottom: -80px;
   }
 
   .createForm {
     min-width: 400px;
     margin-right: 5rem;
   }
-
-  .footer, .push {
-    height: 80px;
-  }
-
 
 }

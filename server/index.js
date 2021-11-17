@@ -1,70 +1,45 @@
-const Joi = require('joi');
 const express = require('express');
 const app = express();
 const cors = require('cors');
-//const DevApi = require("@justinkprince/dev-api");
+const loki = require('lokijs');
 
 app.use(express.json());
 app.use(cors());
 
+const db = new loki(('./data.json'), { persistenceMethod: "fs" });
 
-// const config = {
-//     resources: ["users", "groups", "books"],
-//     filepath: "./data/app.json",
-//     port: 3003,
-//   };
+db.loadDatabase({}, () => {
+    let collection = db.getCollection("restaurants");
   
-// const api = new DevApi(config);
-// api.listen(3003);
-
-
-let restaurants = [
-    {   
-        id: 1, 
-        name: 'restaurant1', 
-        cuisine: 'cuisine1', 
-        price: 'price1', 
-        visited: true,
-        favorite: false,
-        priority: false, 
-    },
-    { 
-        id: 2, 
-        name: 'restaurant2', 
-        cuisine: 'cuisine2', 
-        price: 'price2', 
-        visited: true,
-        favorite: true,
-        priority: true, 
-    },
-    { 
-        id: 3, 
-        name: 'restaurant3', 
-        cuisine: 'cuisine3', 
-        price: 'price3', 
-        visited: false,
-        favorite: false,
-        priority: true, 
+    if (!collection) {
+      collection = db.addCollection("restaurants");
     }
-];
+  });
+
+function create_UUID(){
+    var dt = new Date().getTime();
+    var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        var r = (dt + Math.random()*16)%16 | 0;
+        dt = Math.floor(dt/16);
+        return (c=='x' ? r :(r&0x3|0x8)).toString(16);
+    });
+    return uuid;
+}
 
 
+//READ
 app.get('/api/restaurants', (req, res) => {
-    res.send(restaurants);
+    const restaurants = db.getCollection('restaurants');
+    //console.log(restaurants);
+    res.json(restaurants);
 });
 
-app.post('/api/add', (req, res) => {
-
-    //THIS ISN'T WORKING -- NEED TO FIX!!!!!!
-
-    //const {error} = validateRestaurant(req.body); //result.error
-    // if(error) {
-    //     //400 bad request
-    //     return res.status(400).send(error.details[0].message);
-    // }
+//CREATE
+app.post('/api/restaurants/add', (req, res) => {
+    let collection = db.getCollection('restaurants');
 
     let restaurant = {
-        id: restaurants.length + 1,
+        id: create_UUID(),
         name: req.body.name,
         cuisine: req.body.cuisine,
         price: req.body.price,
@@ -73,69 +48,43 @@ app.post('/api/add', (req, res) => {
         priority: req.body.priority,
     };
 
-    restaurants.push(restaurant);
-    res.send({message: `${restaurant.name} added to the database.`});
-    //console.log(`${restaurant.name} added to the database.`);
+    collection.insert(restaurant);
+    db.saveDatabase();
+    res.json(restaurant);
 });
 
+
+//UPDATE
 app.put('/api/restaurants/update/:id', (req, res) => {
-    //Look up the restaurant
-    //if not existing, return 404
-    let restaurant = restaurants.find(c => c.id === parseInt(req.params.id));
-    if (!restaurant) {
-        return res.status(404).send('The restaurant with the given ID was not found.');
+
+    const requestData = req.body;
+    let collection = db.getCollection('restaurants');
+
+    const restaurant = {
+        ...collection.by("id", req.params.id),
+        ...requestData,
     }
-    //Can simplify these  --if (!restaurant) return res.status(404).send('The restaurant with the given ID was not found.');
 
-    //Validate
-    //If invalid, return 400 - bad request
-    // const {error} = validateRestaurant(req.body); //result.error
-    // if(error) {
-    //     //400 bad request
-    //     return res.status(400).send(error.details[0].message);
-    // }
-
-    restaurant.visited = req.body.visited,
-    restaurant.favorite = req.body.favorite,
-    restaurant.priority = req.body.priority,
-
-    //Return the updated restaurant
-    res.send(restaurant);
+    collection.update(restaurant);
+    db.saveDatabase();
+    res.json(restaurant);
 });
 
+//DELETE
 app.delete('/api/restaurants/delete/:id', (req, res) => {
-    //Look up the restaurant
-    //Not existing, return 404
-    let restaurant = restaurants.find(c => c.id === parseInt(req.params.id));
-    if (!restaurant) res.status(404).send('The restaurant with the given ID was not found.');
-
-
-    //Delete
-    const index = restaurants.indexOf(restaurant);
-    restaurants.splice(index, 1);
-
-    //Return the same restaurant
+    let collection = db.getCollection('restaurants');
+    collection.findAndRemove({ id: { $aeq: req.params.id} });
+    db.saveDatabase();
     res.send({message: `Restaurant was deleted.`});
 });
 
-app.get('/api/restaurants/:id', (req, res) => {
-    let restaurant = restaurants.find(c => c.id === parseInt(req.params.id));
-    if (!restaurant) return res.status(404).send('The restaurant with the given ID was not found.');
-    res.send(restaurant);
-})
+//GET individual restaurant
+// app.get('/api/restaurants/:id', (req, res) => {
+//     let restaurant = restaurants.find(c => c.id === parseInt(req.params.id));
+//     if (!restaurant) return res.status(404).send('The restaurant with the given ID was not found.');
+//     res.send(restaurant);
+// })
 
-// function validateRestaurant(restaurant) {
-//     const schema = Joi.object ({
-//         name: Joi.string().min(3).required(),
-//         cuisine: Joi.string().min(4).required(),
-//         price: Joi.string().min(1).required(),
-//         visited: Joi.string().min(),
-//         favorite: Joi.string().min(),
-//         priority: Joi.string().min(),
-//     });
-
-//     return schema.validate(restaurant);
-// }
 
 // PORT Is NOT working -- just uses port 3000 --19:52 on video "set PORT=XXXX" cmd
 const port = process.env.PORT || 3000;

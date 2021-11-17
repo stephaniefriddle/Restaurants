@@ -1,6 +1,5 @@
 const updateRestaurantBtn = document.querySelector('.updateRestaurant');
 
-
 function updateRestaurant(event) {
 
     restaurantButton = event.target;
@@ -8,8 +7,6 @@ function updateRestaurant(event) {
     let displayName = restaurantButton.getAttribute('display-name');
 
     document.getElementById('insert-name').innerHTML = `Update ${displayName}`;
-
-
 
     document.getElementById('save-btn').onclick = function(event) {
 
@@ -29,8 +26,9 @@ function updateRestaurant(event) {
             },
             body: JSON.stringify(updatedRestaurant)
         })
-        .then(response => response.json())
+        //.then(response => response.json())
         .then(json => console.log(json))
+        .then(removeChildren(resultContainer))
         .then(loadRestaurants());
     }
 }
