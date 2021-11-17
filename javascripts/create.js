@@ -29,13 +29,3 @@ function handleSubmit(event) {
 
 const form = document.querySelector("form");
 form.addEventListener("submit", handleSubmit);
-
-//     data = {
-//         name: formData.querySelector('input[name="name"]').value,
-//         cuisine: formData.querySelector('input[name="cuisine"]').value,
-//         price: formData.querySelector('input[name="price"]').value,
-//         location: formData.querySelector('input[name="location"]').value,
-//         pastVisits: formData.querySelector('input[name="pastVisits"]').value,
-//     }
-
-

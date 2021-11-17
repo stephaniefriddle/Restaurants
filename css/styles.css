@@ -59,6 +59,14 @@ th:first-of-type, td:first-of-type {
     display: none;
 }
 
+th:nth-child(8), th:nth-child(9) {
+    display: none;
+}
+
+td:nth-child(10), td:nth-child(11) {
+    display: none;
+}
+
 /* Footer layout */
 .footer {
     flex-shrink: 0;

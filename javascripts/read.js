@@ -7,19 +7,19 @@ function removeChildren(parent){
     }
 }
 
-
 function loadRestaurants() {
     fetch('http://localhost:3000/api/restaurants', {
         method: 'GET',
         mode: 'cors',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
         }
     })
     .then(response => response.json())
     .then(data => {
 
-        let restaurants = data;
+        let restaurants = data.data;
 
         removeChildren(resultContainer);
 

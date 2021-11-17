@@ -1,15 +1,12 @@
-//const Joi = require('joi');
 const express = require('express');
 const app = express();
 const cors = require('cors');
 const loki = require('lokijs');
-const path = require('path');
 
 app.use(express.json());
 app.use(cors());
 
-const db = new loki(path.resolve('./data.json'), { persistenceMethod: "fs" });
-//const db = new loki(('./data.json'), { persistenceMethod: "fs" });
+const db = new loki(('./data.json'), { persistenceMethod: "fs" });
 
 db.loadDatabase({}, () => {
     let collection = db.getCollection("restaurants");
@@ -19,58 +16,27 @@ db.loadDatabase({}, () => {
     }
   });
 
-// let restaurants = [
-//     {   
-//         id: 1, 
-//         name: 'restaurant1', 
-//         cuisine: 'cuisine1', 
-//         price: '$$', 
-//         visited: true,
-//         favorite: false,
-//         priority: false, 
-//     },
-//     { 
-//         id: 2, 
-//         name: 'restaurant2', 
-//         cuisine: 'cuisine2', 
-//         price: '$', 
-//         visited: true,
-//         favorite: true,
-//         priority: true, 
-//     },
-//     { 
-//         id: 3, 
-//         name: 'restaurant3', 
-//         cuisine: 'cuisine3', 
-//         price: '$$$', 
-//         visited: false,
-//         favorite: false,
-//         priority: true, 
-//     }
-// ];
+function create_UUID(){
+    var dt = new Date().getTime();
+    var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        var r = (dt + Math.random()*16)%16 | 0;
+        dt = Math.floor(dt/16);
+        return (c=='x' ? r :(r&0x3|0x8)).toString(16);
+    });
+    return uuid;
+}
 
 
-
-//GET
+//READ
 app.get('/api/restaurants', (req, res) => {
     const restaurants = db.getCollection('restaurants');
-    console.log(restaurants);
+    //console.log(restaurants);
     res.json(restaurants);
 });
 
+//CREATE
 app.post('/api/restaurants/add', (req, res) => {
-    //const requestData = req.body;
     let collection = db.getCollection('restaurants');
-
-    function create_UUID(){
-        var dt = new Date().getTime();
-        var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-            var r = (dt + Math.random()*16)%16 | 0;
-            dt = Math.floor(dt/16);
-            return (c=='x' ? r :(r&0x3|0x8)).toString(16);
-        });
-        return uuid;
-    }
 
     let restaurant = {
         id: create_UUID(),
@@ -82,25 +48,14 @@ app.post('/api/restaurants/add', (req, res) => {
         priority: req.body.priority,
     };
 
-
     collection.insert(restaurant);
     db.saveDatabase();
     res.json(restaurant);
-
-    // restaurants.push(restaurant);
-    // res.send({message: `${restaurant.name} added to the database.`});
 });
 
 
 //UPDATE
 app.put('/api/restaurants/update/:id', (req, res) => {
-    //Look up the restaurant
-    //if not existing, return 404
-    // let restaurant = restaurants.find(c => c.id === parseInt(req.params.id));
-    // if (!restaurant) {
-    //     return res.status(404).send('The restaurant with the given ID was not found.');
-    // }
-    //Can simplify these  --if (!restaurant) return res.status(404).send('The restaurant with the given ID was not found.');
 
     const requestData = req.body;
     let collection = db.getCollection('restaurants');
@@ -110,35 +65,16 @@ app.put('/api/restaurants/update/:id', (req, res) => {
         ...requestData,
     }
 
-    collection.update(item);
+    collection.update(restaurant);
     db.saveDatabase();
-    res.json(item);
-
-    // restaurant.visited = req.body.visited,
-    // restaurant.favorite = req.body.favorite,
-    // restaurant.priority = req.body.priority
-
-    //Return the updated restaurant
-    //res.send(restaurant);
+    res.json(restaurant);
 });
 
 //DELETE
 app.delete('/api/restaurants/delete/:id', (req, res) => {
-    //Look up the restaurant
-    //Not existing, return 404
-    // let restaurant = restaurants.find(c => c.id === parseInt(req.params.id));
-    // if (!restaurant) res.status(404).send('The restaurant with the given ID was not found.');
-
     let collection = db.getCollection('restaurants');
-    collection.findAndRemove({ id: { $aeq: id} });
+    collection.findAndRemove({ id: { $aeq: req.params.id} });
     db.saveDatabase();
-
-
-    //Delete
-    // const index = restaurants.indexOf(restaurant);
-    // restaurants.splice(index, 1);
-
-    //Return the same restaurant
     res.send({message: `Restaurant was deleted.`});
 });
 
