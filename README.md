@@ -6,7 +6,7 @@ To accomplish this, I have a web server that's connected with ExpressJS. I use C
 ## Requirements and Project Features
 You're currently reading the README, but below you will find the other requirements and features I've choosen to implement:
 
- - I used Bootstrap to create a responsive design with two media queries, one for mobile and one for desktop. On the main page, the table of the results is responsive (if it's on mobile, only the table will scroll) and changes based on screen size. The form changes layout on the create page. The menu bar on both pages will allow for a larger right margin on desktop layout so it's not pushed all the way to the end.
+ - I used Bootstrap to create a responsive design with two media queries, one for mobile and one for desktop. On the main page, the table of the results is responsive. On mobile the table layout is vertical and some fields are hidden. If on desktop view, table is responsive and will scroll horizontally if needed.
 
  - You'll see more than the required 5 commits.
 
