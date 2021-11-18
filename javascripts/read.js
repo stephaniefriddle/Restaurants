@@ -8,6 +8,7 @@ function removeChildren(parent){
 }
 
 function loadRestaurants() {
+
     fetch('http://localhost:3000/api/restaurants', {
         method: 'GET',
         mode: 'cors',
@@ -21,7 +22,7 @@ function loadRestaurants() {
 
         let restaurants = data.data;
 
-        removeChildren(resultContainer);
+        //removeChildren(resultContainer);
 
         function generateTableHead(table, tableData) {
             let thead = table.createTHead();
@@ -79,4 +80,3 @@ function loadRestaurants() {
 loadRestaurantsBtn.addEventListener('click', function() {
     loadRestaurants();
 })
-
