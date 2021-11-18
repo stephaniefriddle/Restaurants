@@ -8,7 +8,6 @@ function removeChildren(parent){
 }
 
 function loadRestaurants() {
-
     fetch('http://localhost:3000/api/restaurants', {
         method: 'GET',
         mode: 'cors',
