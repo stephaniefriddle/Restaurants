@@ -28,7 +28,6 @@ function updateRestaurant(event) {
         })
         .then(response => response.json())
         .then(json => console.log(json))
-        //.then(removeChildren(resultContainer))
-        .then(loadRestaurants());
+        .then(loadRestaurants())
     }
 }

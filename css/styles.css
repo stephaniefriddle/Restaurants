@@ -51,6 +51,10 @@ h3 {
     text-transform: capitalize;
 }
 
+.d-flex {
+    justify-content: space-around;
+}
+
 th:first-of-type, td:first-of-type {
     display: none;
 }
@@ -59,7 +63,7 @@ th:nth-child(8), th:nth-child(9) {
     display: none;
 }
 
-td:nth-child(10), td:nth-child(11) {
+td:nth-child(9), td:nth-child(10) {
     display: none;
 }
 
@@ -79,13 +83,6 @@ td:nth-child(10), td:nth-child(11) {
         margin: .5em;
     }
 
-    p:nth-of-type(2):after { 
-        content: " Once you hit this button, you'll see a customized list of restaurants I recommend. For even more functionality, please use a larger device to view on."; 
-    }
-
-    p:nth-of-type(3) {display: none;}
-    p:nth-of-type(4) {display: none;}
-
     /* Force table to not be like tables anymore */
     table, thead, tbody, th, td, tr {
         display: block;
@@ -97,23 +94,13 @@ td:nth-child(10), td:nth-child(11) {
 		top: -9999px;
 		left: -9999px;
 	}
-
-    th:nth-child(3), th:nth-child(4), th:nth-child(5), th:nth-child(6), th:nth-child(7) {
-        display: none;
-    }
     
-    td:nth-child(5), td:nth-child(6), td:nth-child(7), td:nth-child(8), td:nth-child(9) {
-        display: none;
-    }
-    
-    tr:nth-child(even) {background: #ccc}
-
     .table-responsive {
         padding: 1em 0;
     }
-	
-	tr { 
-        border: 2px solid #ccc; 
+    
+    tr { 
+        border: 3px solid #ccc; 
     }
 	
 	td { 
@@ -121,17 +108,11 @@ td:nth-child(10), td:nth-child(11) {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-		border: none;
-		border-bottom: 1px solid #eee; 
+		border-bottom: 5px solid #eee; 
 	}
 	
 	td:before { 
 		/* Now like a table header */
-		/* position: absolute; */
-		/* Top/left values mimic padding */
-		/* top: 6px;
-		left: 6px; */
-		/* width: 50%;  */
 		white-space: nowrap;
 	}
 

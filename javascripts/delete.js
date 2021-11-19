@@ -16,4 +16,5 @@ function deleteRestaurant(event) {
     .then(response => response.json())
     .then(json => console.log(json))
     .then(alert("Restaurant was deleted"))
+    .then(loadRestaurants())
 }

@@ -21,7 +21,7 @@ function loadRestaurants() {
 
         let restaurants = data.data;
 
-        //removeChildren(resultContainer);
+        removeChildren(resultContainer);
 
         function generateTableHead(table, tableData) {
             let thead = table.createTHead();
@@ -46,24 +46,24 @@ function loadRestaurants() {
                     let text = document.createTextNode(element[key]);
 
                     if (key === 'priority') {
-                        let updateBtn = row.insertCell();
+                        let actionCell = row.insertCell();
+                        actionCell.setAttribute("class", "d-flex");
                         let updateButton = document.createElement("button");
                         updateButton.innerHTML = "Update";
-                        updateButton.setAttribute("class", "updateRestaurant");
+                        updateButton.classList = "updateRestaurant btn btn-secondary";
                         updateButton.setAttribute("data-restaurant-id", element.id);
                         updateButton.setAttribute("display-name", element.name)
                         updateButton.setAttribute("data-bs-toggle", "modal");
                         updateButton.setAttribute("data-bs-target", "#myModal");
                         updateButton.addEventListener("click", updateRestaurant);
-                        updateBtn.appendChild(updateButton);
-
-                        let deleteBtn = row.insertCell();
+                        actionCell.appendChild(updateButton);
+                        
                         let deleteButton = document.createElement("button");
                         deleteButton.innerHTML = "Delete";
-                        deleteButton.setAttribute("class", "deleteRestaurant");
+                        deleteButton.classList = "deleteRestaurant btn btn-secondary";
                         deleteButton.setAttribute("data-restaurant-id", element.id);
                         deleteButton.addEventListener("click", deleteRestaurant);
-                        deleteBtn.appendChild(deleteButton);
+                        actionCell.appendChild(deleteButton);
                     }
                     cell.appendChild(text);
                 }
