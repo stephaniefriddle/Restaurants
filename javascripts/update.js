@@ -31,3 +31,26 @@ function updateRestaurant(event) {
         .then(loadRestaurants())
     }
 }
+
+let modal = document.getElementById('myModal');
+modal.addEventListener('show.bs.modal', function(event) {
+    let button = event.relatedTarget;
+    let visited = button.getAttribute('data-visited');
+    let favorite = button.getAttribute('data-favorite');
+    let priority = button.getAttribute('data-priority');
+
+    if(visited == 'true') {
+        let visited = document.getElementById('visited');
+        visited.setAttribute('checked', true);
+    }
+
+    if(favorite == 'true') {
+        let favorite = document.getElementById('favorite');
+        favorite.setAttribute('checked', true);
+    }
+
+    if(priority == 'true') {
+        let priority = document.getElementById('priority');
+        priority.setAttribute('checked', true);
+    }
+})

@@ -45,6 +45,13 @@ header {
   margin-bottom: -80px;
 }
 
+#layoutControl {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  min-height: 100%;
+}
+
 .createForm {
   min-width: 250px;
   max-width: 400px;
@@ -105,13 +112,6 @@ footer {
     margin-right: 5rem;
   }
 
-  #layoutControl {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    min-height: 100%;
-  }
-
   #fullForm {
     display: flex;
     flex-direction: column;
@@ -121,7 +121,6 @@ footer {
 
   .createForm {
     min-width: 400px;
-    margin-right: 5rem;
+    margin-right: 10rem;
   }
-
 }

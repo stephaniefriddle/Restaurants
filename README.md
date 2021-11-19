@@ -4,9 +4,9 @@ The struggle of deciding where to eat is real, so I designed this project to kee
 To accomplish this, I have a web server that's connected with ExpressJS. I use CRUD actions to manipulate the data.
 
 ## Requirements and Project Features
-You're currently reading the README, but below you will find the other requirements and features I've choosen to implement:
+You're currently reading the README, but below you will find the other requirements and features I've chosen to implement:
 
- - I used Bootstrap to create a responsive design with two media queries, one for mobile and one for desktop. On the main page, the table of the results is responsive. On mobile the table layout is vertical and some fields are hidden. If on desktop view, table is responsive and will scroll horizontally if needed.
+ - I used Bootstrap to create a responsive design with two media queries, one for mobile and one for desktop. On the main page, the table of the results is responsive. On mobile the table layout is vertical. If on desktop view, table is responsive and will scroll horizontally if needed.
 
  - You'll see more than the required 5 commits.
 
@@ -39,9 +39,8 @@ To start off:
 
 To start the server side:
 
- - [Install Node.js](https://nodejs.dev/learn/how-to-install-nodejs) and [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
+ - Install [Node.js](https://nodejs.dev/learn/how-to-install-nodejs) and [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
 
  - Run `npm start`, which will initiate the server.
 
- - If the server stops, restart with `nodemon start server/index.js`.
-
+ - If the server stops, restart with `npm start` or `nodemon start server/index.js`.

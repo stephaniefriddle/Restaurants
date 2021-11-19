@@ -55,6 +55,9 @@ function loadRestaurants() {
                         updateButton.setAttribute("display-name", element.name)
                         updateButton.setAttribute("data-bs-toggle", "modal");
                         updateButton.setAttribute("data-bs-target", "#myModal");
+                        updateButton.setAttribute("data-visited", element.visited);
+                        updateButton.setAttribute("data-favorite", element.favorite);
+                        updateButton.setAttribute("data-priority", element.priority);
                         updateButton.addEventListener("click", updateRestaurant);
                         actionCell.appendChild(updateButton);
                         
